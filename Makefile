@@ -54,3 +54,8 @@ SERVER_OBJ = $(SERVER_SRC:.cu=.o)
 llm_server: $(SERVER_SRC) src/fp16_forward.cu kernels/fp16_ops.cu kernels/flash_attention.cu ../quantlib/libquant.a
 	$(NVCC) $(NVCCFLAGS) $^ -o $@ -L../quantlib -lquant -lcublas -lm -lpthread
 
+
+benchmark: kernels/matmul.cu kernels/softmax.cu kernels/rmsnorm.cu \
+           kernels/rope.cu kernels/attention.cu kernels/feedforward.cu \
+           src/kv_cache.cu tests/benchmark_all.cu
+	$(NVCC) $(NVCCFLAGS) $^ -o $@

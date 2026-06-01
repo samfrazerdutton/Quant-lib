@@ -6,7 +6,7 @@
 // out[i] = x[i] / sqrt(mean(x^2) + eps) * weight[i]
 // One block per row (one token). Warp-reduce for the sum of squares.
 
-__device__ float warp_reduce_sum(float val) {
+__device__ static float warp_reduce_sum(float val) {
     #pragma unroll
     for (int offset = 16; offset > 0; offset >>= 1)
         val += __shfl_down_sync(0xffffffff, val, offset);

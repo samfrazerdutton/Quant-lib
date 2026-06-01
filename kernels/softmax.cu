@@ -3,14 +3,14 @@
 
 // ── Warp-level reduction helpers ─────────────────────────────────────────────
 // These use shuffle intrinsics — no shared memory needed, runs inside one warp
-__device__ float warp_reduce_max(float val) {
+__device__ static float warp_reduce_max(float val) {
     #pragma unroll
     for (int offset = 16; offset > 0; offset >>= 1)
         val = fmaxf(val, __shfl_down_sync(0xffffffff, val, offset));
     return val;
 }
 
-__device__ float warp_reduce_sum(float val) {
+__device__ static float warp_reduce_sum(float val) {
     #pragma unroll
     for (int offset = 16; offset > 0; offset >>= 1)
         val += __shfl_down_sync(0xffffffff, val, offset);
