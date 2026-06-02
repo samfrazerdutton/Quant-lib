@@ -1,0 +1,30 @@
+# Compiled object files and libraries
+*.o
+*.a
+*.so
+*.out
+
+# Downloaded model weights
+models/
+*.gguf
+
+# Main Server and Benchmarks
+llm_server
+benchmark
+
+# Root Test Executables
+test_softmax
+test_real
+test_quant_infer
+test_matmul
+test_kvcache
+test_fp16_forward
+test_forward
+test_continuous_batch
+test_attention
+
+# Quantlib Test Executables
+quantlib_src/test_gemm
+quantlib_src/test_fp8
+quantlib_src/test_fp4
+quantlib_src/test_awq
